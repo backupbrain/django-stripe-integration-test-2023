@@ -1,0 +1,88 @@
+{% extends "checkout/base.html" %}
+{% block main %}
+<form id="payment-form" data-secret="{{ client_secret }}" action="{% url 'checkout' %}" method="post" {% if request.POST %}was-validated{% endif %}>
+	{% csrf_token %}
+	<div class="mb-3">
+		<label for="email" class="form-label">Email</label>
+		<input id="email" class="form-control" type="email" name="email" required placeholder="email@example.com" {% if form.email.value %}value="{{ form.email.value }}"{% endif %} />
+
+		<div class="invalid-feedback">
+		    {% for error in form.email.errors %}
+		        {{ error|escape }}
+		    {% endfor %}
+		</div>
+
+	</div>
+	<div class="mb-3">
+		<label for="coupon-code" class="form-label">Coupon Code</label>
+		<input id="coupon-code" class="form-control" type="text" name="coupon" placeholder="ABC123" {% if form.coupon.value %}value="{{ form.coupon.value }}"{% endif %} />
+		{% if form.errors.coupon %}
+		<div class="invalid-feedback">
+			{{ form.errors.coupon }}
+		</div>
+		{% endif %}
+	</div>
+	<div class="mb-3">
+		<label class="form-label">Payment Method</label>
+		<div id="card-element"></div>
+		<div id="card-errors" role="alert"></div>
+	</div>
+  
+	<div class="mb-3">
+  		<button id="submit" class="btn btn-primary" type="submit">Test</button>
+  	</div>
+</form>
+<script>
+	var clientSecret = document.getElementById('payment-form').getAttribute('data-secret');
+	var style = {
+	  base: {
+	    color: "#32325d",
+	  }
+	};
+	var card = elements.create("card", { style: style });
+	card.mount("#card-element");
+	card.on('change', ({error}) => {
+	  let displayError = document.getElementById('card-errors');
+	  if (error) {
+	    displayError.textContent = error.message;
+	  } else {
+	    displayError.textContent = '';
+	  }
+	});
+
+	var form = document.getElementById('payment-form');
+
+	// form.addEventListener('submit', function(ev) {
+	//   var submitButton = document.getElementById('submit');
+	//   submitButton.disabled = true;
+	//   ev.preventDefault();
+	//   // If the client secret was rendered server-side as a data-secret attribute
+	//   // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
+	//   stripe.confirmCardPayment(clientSecret, {
+	//     payment_method: {
+	//       card: card,
+	//       billing_details: {
+	//         name: 'Jenny Rosen'
+	//       }
+	//     }
+	//   }).then(function(result) {
+	//     if (result.error) {
+	//       // Show error to your customer (for example, insufficient funds)
+	//       console.log(result.error.message);
+	//       submitButton.disabled = false;
+	//     } else {
+	//       // The payment has been processed!
+	//       if (result.paymentIntent.status === 'succeeded') {
+	//         // Show a success message to your customer
+	//         console.log(result);
+	//         // There's a risk of the customer closing the window before callback
+	//         // execution. Set up a webhook or plugin to listen for the
+	//         // payment_intent.succeeded event that handles any business critical
+	//         // post-payment actions.
+	//         submitButton.disabled = false;
+	//       }
+	//     }
+	//   });
+	// });
+</script>
+{% endblock %}
