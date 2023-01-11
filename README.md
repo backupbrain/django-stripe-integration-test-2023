@@ -29,18 +29,25 @@ pip3 install -r requirements.txt
 5. Set up project settings proper stripe API keys
 
 ```
-cp src/env.example src/.env
+cd src
+cp env.example .env
 nano -w src/.env
 ```
 
-6. Run
+6. Migrate database
 
 ```
-cd src
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+7. Run
+
+```
 python3 manage.py runserver
 ```
 
-7. Test
+8. Test
 
 [Load in Browser](http://localhost:8000)
 
