@@ -49,6 +49,6 @@ python3 manage.py runserver
 
 8. Test
 
-[Load in Browser](http://localhost:8000)
+Go to [http://localhost:8000](http://localhost:8000)
 
 Test with credit card number `4242424242424242`
