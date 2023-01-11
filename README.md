@@ -20,8 +20,8 @@ pip3 install -r requirements.txt
 
 4. Set up a Stripe account with the following product, price, and coupon:
 
-|         | ID                  |
-|---------+---------------------|
+| Type    | ID                  |
+| ------- | ------------------- |
 | Product | prod_N8GtP4kfDmf5Wn |
 | Price   | sku_GOdUWWauNOfRgU  |
 | Coupon  | 2020LOVE            |
