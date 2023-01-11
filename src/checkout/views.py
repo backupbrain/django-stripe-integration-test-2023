@@ -53,8 +53,11 @@ class CheckoutView(View):
             coupon = form.cleaned_data['coupon']
             print('email: {}'.format(email))
             print('coupon: {}'.format(coupon))
-            coupons = stripe.Coupon.list()
-            print(coupons)
+            discounts = None
+            if coupon is not None:
+                discounts = [{
+                    'coupon': coupon
+                }]
             try:
                 session = stripe.checkout.Session.create(
                     customer_email=email,
@@ -62,11 +65,9 @@ class CheckoutView(View):
                         'price': stripe_sku,
                         'quantity': 1,
                     }],
-                    discounts=[{
-                        'coupon': coupon
-                    }],
+                    discounts=discounts,
                     mode='payment',
-                    success_url=request.build_absolute_uri('/success')
+                    success_url=request.build_absolute_uri('/success-fake')
                 )
                 return redirect('checkout_success')
             except Exception as e:
