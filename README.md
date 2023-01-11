@@ -31,7 +31,7 @@ pip3 install -r requirements.txt
 ```
 cd src
 cp env.example .env
-nano -w src/.env
+nano -w .env
 ```
 
 6. Migrate database
