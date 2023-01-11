@@ -47,12 +47,9 @@ class CheckoutView(View):
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         form = context['form']
-        print(form.errors)
         if form.is_valid():
             email = form.cleaned_data['email']
             coupon = form.cleaned_data['coupon']
-            print('email: {}'.format(email))
-            print('coupon: {}'.format(coupon))
             discounts = None
             if coupon is not None:
                 discounts = [{
