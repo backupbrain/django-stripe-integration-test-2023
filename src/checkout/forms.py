@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+# by putting this here, we save an API call to Stripe
 valid_coupons = [
     '2020LOVE'
 ]
