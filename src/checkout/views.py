@@ -66,6 +66,7 @@ class CheckoutView(View):
                     mode='payment',
                     success_url=request.build_absolute_uri('/success-fake')
                 )
+                print(session)
                 return redirect('checkout_success')
             except Exception as e:
                 print(e)
