@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.conf import settings
