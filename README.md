@@ -1,6 +1,8 @@
 # Stripe Integration Test 2023
 
-Uses API version 2022-11-15
+Uses API version 2022-11-15 and Python3/Django 3 to create a simple checkout page where a user can enter their email address, a coupon code, and enter their credit card information to complete a purchase for a pre-defined Stripe product and SKU (price).
+
+Successful payments route to a `/success` URL.
 
 ## Setup
 
